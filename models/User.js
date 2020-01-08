@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const SCHEMA = mongoose.Schema;
 
@@ -25,6 +25,11 @@ const USERSCHEMA = new SCHEMA({
         required: [true, "Password is required"],
         trim: true
     },
+    userType: {
+        type: String,
+        required: [true, "Usertype is required"],
+        trim: true
+    },
     displayPicture: {
         type: String,
         default: "dp_placeholder.png"
@@ -32,49 +37,28 @@ const USERSCHEMA = new SCHEMA({
     createdAt: {
         type: Date,
         default: Date.now
-    }
-});
-
-// mongoose "pre" hook to hash the password of every new user 
-USERSCHEMA.pre('save', async function (next) {
-    if (!this.isNew || !this.isModified) {
-        next();
-    } else {
-        try {
-            // hash the plain text password
-            let hashedPassword = await bcrypt.hash(this.password, 10); // 10 is the salt rounds
-            // set the hashed password to be the password of the new user
-            this.password = hashedPassword;
-            // execute next code 
-            next();
-
-        } catch (error) {
-            next(error);
-            console.log(error.message);
+    },
+    tokens: [{
+        token: {
+            type: String,
+            require: true
         }
-    }
+    }]
 });
 
-//check if email exists already
-USERSCHEMA.statics.emailExists = async function (email) {
-    let emailExists = await USER.findOne({ email: email });
-    return emailExists;
+USERSCHEMA.statics.checkCrediantialsDb = async (user11, pass11) => {
+    const user1 = User.findOne({ email: user11, password: pass11 });
+    return user1;
 }
 
-// compare login password with the actual password
-USERSCHEMA.methods.comparePassword = async function (plainPassword) {
-    let matched = await bcrypt.compare(plainPassword, this.password);
-    return matched;
+USERSCHEMA.methods.generateAuthToken = async function () {
+    const user = this;
+    const token = jwt.sign({ _id: user._id.toString() }, 'mynewtoken');
+    console.log(token);
+    user.tokens = user.tokens.concat({ token: token });
+    await user.save();
+    return token;
 }
-
-// hide some attributes of user model while sending json response 
-USERSCHEMA.methods.toJSON = function () {
-    let user = this.toObject();
-    delete user.password;
-    delete user.createdAt;
-    delete user.__v;
-    return user;
-};
 
 const USER = mongoose.model('user', USERSCHEMA);
 export default USER;
