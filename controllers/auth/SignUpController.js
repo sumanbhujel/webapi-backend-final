@@ -1,4 +1,4 @@
-import User from '../../models/User';
+const User =require('../../models/User');
 
 class SingUpController {
     async registerUser(req, res) {
@@ -12,4 +12,4 @@ class SingUpController {
     }
 }
 
-export default new SingUpController();
+module.exports = new SingUpController();

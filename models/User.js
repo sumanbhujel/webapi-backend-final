@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
+const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken");
 
 const SCHEMA = mongoose.Schema;
 
@@ -12,6 +12,11 @@ const USERSCHEMA = new SCHEMA({
     familyName: {
         type: String,
         required: [true, 'Family name is required'],
+        trim: true
+    },
+    gender:{
+        type: String,
+        required: [true, "Gender is required"],
         trim: true
     },
     email: {
@@ -61,4 +66,4 @@ USERSCHEMA.methods.generateAuthToken = async function () {
 }
 
 const USER = mongoose.model('user', USERSCHEMA);
-export default USER;
+module.exports = USER;

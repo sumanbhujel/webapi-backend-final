@@ -1,10 +1,10 @@
-import express from 'express';
-import SignUpController from '../controllers/auth/SignUpController';
-import SignInController from '../controllers/auth/SignInController';
+const express = require('express');
+const SignInController = require('../controllers/auth/SignInController');
+const SignUpController = require('../controllers/auth/SignUpController');
 
 const APIROUTER = express.Router();
 
 APIROUTER.post('/signup', SignUpController.registerUser);
 APIROUTER.post('/login', SignInController.logIn);
 
-export default APIROUTER;
+module.exports = APIROUTER;

@@ -1,4 +1,4 @@
-import User from '../../models/User';
+const User =require('../../models/User');
 
 class SingInController {
     async logIn(req, res) {
@@ -13,4 +13,4 @@ class SingInController {
     }
 }
 
-export default new SingInController();
+module.exports = new SingInController();
