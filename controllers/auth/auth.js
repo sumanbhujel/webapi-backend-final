@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+const USER = require("../models/User");
 
 const auth = async (req, res, next) => {
     try {
         const token = req.header('Authorization').replace('Bearer ', '');
         const decoded = jwt.verify(token, 'mynewtoken');
-        const user = await User.findaOne({
+        const user = await USER.findaOne({
             _id: decoded._id, 'tokens.token': token
         });
         if (!user) {

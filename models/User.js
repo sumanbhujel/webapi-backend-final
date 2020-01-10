@@ -6,33 +6,33 @@ const SCHEMA = mongoose.Schema;
 const USERSCHEMA = new SCHEMA({
     firstName: {
         type: String,
-        required: [true, 'First name is required'],
+        required: true,
         trim: true
     },
     familyName: {
         type: String,
-        required: [true, 'Family name is required'],
+        required: true,
         trim: true
     },
-    gender:{
+    gender: {
         type: String,
-        required: [true, "Gender is required"],
+        required: true,
         trim: true
     },
     email: {
         type: String,
-        required: [true, "Email-address is required"],
+        required: true,
         unique: true,
         trim: true
     },
     password: {
         type: String,
-        required: [true, "Password is required"],
+        required: true,
         trim: true
     },
     userType: {
         type: String,
-        required: [true, "Usertype is required"],
+        required: true,
         trim: true
     },
     displayPicture: {
@@ -46,13 +46,13 @@ const USERSCHEMA = new SCHEMA({
     tokens: [{
         token: {
             type: String,
-            require: true
+            required: true
         }
     }]
 });
 
 USERSCHEMA.statics.checkCrediantialsDb = async (user11, pass11) => {
-    const user1 = User.findOne({ email: user11, password: pass11 });
+    const user1 = USER.findOne({ email: user11, password: pass11 });
     return user1;
 }
 

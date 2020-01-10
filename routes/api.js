@@ -1,10 +1,9 @@
 const express = require('express');
-const SignInController = require('../controllers/auth/SignInController');
-const SignUpController = require('../controllers/auth/SignUpController');
+const AuthController = require('../controllers/auth/AuthController');
 
 const APIROUTER = express.Router();
 
-APIROUTER.post('/signup', SignUpController.registerUser);
-APIROUTER.post('/login', SignInController.logIn);
+APIROUTER.post('/signup', AuthController.registerUser);
+APIROUTER.post('/login', AuthController.logIn);
 
 module.exports = APIROUTER;
