@@ -4,17 +4,12 @@ const jwt = require("jsonwebtoken");
 const SCHEMA = mongoose.Schema;
 
 const USERSCHEMA = new SCHEMA({
-    firstName: {
+    fullName: {
         type: String,
         required: true,
         trim: true
     },
-    familyName: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    gender: {
+    address: {
         type: String,
         required: true,
         trim: true
@@ -24,8 +19,18 @@ const USERSCHEMA = new SCHEMA({
         required: true,
         unique: true,
         trim: true
+    },    
+    mobileNumber: {
+        type: String,
+        required: true,
+        trim: true
     },
     password: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    gender: {
         type: String,
         required: true,
         trim: true
@@ -37,7 +42,7 @@ const USERSCHEMA = new SCHEMA({
     },
     displayPicture: {
         type: String,
-        default: "dp_placeholder.png"
+        default: "default.png"
     },
     createdAt: {
         type: Date,
@@ -59,7 +64,7 @@ USERSCHEMA.statics.checkCrediantialsDb = async (user11, pass11) => {
 USERSCHEMA.methods.generateAuthToken = async function () {
     const user = this;
     const token = jwt.sign({ _id: user._id.toString() }, 'mynewtoken');
-    console.log(token);
+    // console.log(token);
     user.tokens = user.tokens.concat({ token: token });
     await user.save();
     return token;
