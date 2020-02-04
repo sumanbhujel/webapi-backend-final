@@ -9,7 +9,7 @@ const SCRAPSCHEMA = new SCHEMA({
         required: true,
         trim: true
     },
-    productType: {
+    scrapType: {
         type: String,
         required: true,
         trim: true
