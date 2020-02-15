@@ -8,17 +8,15 @@ const APIROUTER = express.Router();
 APIROUTER.post('/signup', AuthController.registerUser);
 APIROUTER.post('/login', AuthController.logIn);
 
-APIROUTER.get('/users', UserController.viewUsers);
-APIROUTER.get('/users/singleuser/:id', UserController.viewUserById);
-APIROUTER.put('/updateuser/:id', UserController.updateUserDetail);
-APIROUTER.delete('/deleteuser/:id', UserController.deleteUser);
+APIROUTER.get('/user', UserController.viewUsers);
+APIROUTER.get('/user/:id', UserController.viewUserById);
+APIROUTER.put('/user/:id', UserController.updateUserDetail);
+APIROUTER.delete('/user/:id', UserController.deleteUser);
 
-APIROUTER.post('/addscrap', ScrapController.addScrap);
-APIROUTER.post('/addnewscrap', ScrapController.addNewScrap);
-APIROUTER.get('/scraps', ScrapController.viewScrap);
-APIROUTER.get('/newscraps', ScrapController.getScrap);
-APIROUTER.get('/scraps/singleuser/:id', ScrapController.viewScrapById);
-APIROUTER.put('/updatescrap/:id', ScrapController.updateScrap);
-APIROUTER.delete('/deletescrap/:id', ScrapController.deleteScrap);
+APIROUTER.post('/scrap', ScrapController.addNewScrap);
+APIROUTER.get('/scrap', ScrapController.getScrap);
+APIROUTER.get('/scrap/:id', ScrapController.viewScrapById);
+APIROUTER.put('/scrap/:id', ScrapController.updateScrap);
+APIROUTER.delete('/scrap/:id', ScrapController.deleteScrap);
 
 module.exports = APIROUTER;

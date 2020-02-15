@@ -1,16 +1,7 @@
 const SCRAP = require('../models/Scrap');
 
 class ScrapController {
-
-    async addScrap(req, res) {
-        var newScrap = new SCRAP(req.body);
-        newScrap.save().then(function () {
-            res.send('Scrap details added');
-        }).catch(function (e) {
-            res.send(e);
-            console.log(e);
-        });
-    }
+    
     async addNewScrap(req, res) {
         var newScrap = new SCRAP(req.body);
         newScrap.save().then(newScrap => {
@@ -26,13 +17,6 @@ class ScrapController {
             }).catch(error => {
                 res.json({ error });
             });
-    }
-    async viewScrap(req, res) {
-        SCRAP.find().then(function (scrap) {
-            res.send(scrap);
-        }).catch(function (er) {
-            res.send(er);
-        });
     }
     async viewScrapById(req, res) {
         SCRAP.findOne({ userId: req.params.id }).then(function (scrap_data) {

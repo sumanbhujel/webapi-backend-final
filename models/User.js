@@ -19,7 +19,7 @@ const USERSCHEMA = new SCHEMA({
         required: true,
         unique: true,
         trim: true
-    },    
+    },
     mobileNumber: {
         type: String,
         required: true,
@@ -37,8 +37,7 @@ const USERSCHEMA = new SCHEMA({
     },
     userType: {
         type: String,
-        required: true,
-        trim: true
+        default: "normal"
     },
     displayPicture: {
         type: String,
